@@ -1,0 +1,26 @@
+---
+- name: Build and push Docker image
+  hosts: your_target_host
+  gather_facts: False
+  become: true
+
+  tasks:
+    - name: Build the Docker image
+      docker_image:
+        name: your_dockerhub_username/tomcat_app:latest
+        source: build
+        build:
+          path: /path/to/dockerfile_directory  # Replace with the directory containing your Dockerfile
+          pull: yes
+        state: present
+        force_tag: yes
+
+    - name: Log in to Docker Hub
+      docker_login:
+        username: your_dockerhub_username
+        password: your_dockerhub_password  # It's recommended to use Ansible vault to store sensitive information like passwords.
+
+    - name: Push the Docker image to Docker Hub
+      docker_image:
+        name: your_dockerhub_username/tomcat_app:latest
+        push: yes
