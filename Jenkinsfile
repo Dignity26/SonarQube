@@ -1,54 +1,56 @@
 pipeline {
-   agent {
-        label 'node1'
-    }
-
-    tools {
+    agent none
+        tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven "maven"
     }
-
     stages {
         stage('SCM') {
+            agent {
+                label 'node1'
+            }
             steps {
-                // Get some code from a GitHub repository
-				sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
+                        // Your build steps for Node 1
+                sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
                 git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
+            }
+        }
+        stage('Build') {
+            agent {
+                label 'node1'
+            }
+            steps {
+                        // Your build steps for Node 2
+                sh "mvn clean install"
+            }
+        }
+        stage('Build and Push Docker image') {
+            agent {
+                label 'node1'
+            }
+            steps {
+                script{
+                   sh 'ansible-playbook build_and_push_docker.yml'
+				}
                 
             }
         }
-		stage ('Build'){
-            steps {
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-                sh "mvn clean install"
+        stage('Deploy on Kubernetes') {
+            agent {
+                label 'node2'
             }
-            
-        }
+            steps {
 
-        stage ('Docker'){
-            steps{
-                script{
-                   sh 'ansible-playbook build_and_push_docker.yml'
-				   //sh 'sudo docker stop Thar'
-				   //sh 'sudo docker rm Thar'
-				   //sh 'sudo docker rmi dignity26/my_tomcat_image:latest'
-				   //sh 'sudo docker build -t dignity26/my_tomcat_image:latest .'
-				   //sh 'sudo docker run -d -p 9090:8080 --name Thar dignity26/my_tomcat_image:latest'
-				   //sh 'sudo docker login -u "dignity26" -p "Ajit\\$1994"'
-				   //sh 'sudo docker push dignity26/my_tomcat_image:latest'
-
-				} 
+                sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
+                git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
+                sh 'kubectl  apply -f deployment.yml'
+				sh 'kubectl  apply -f service.yml'
 				
-		stage ('Deploy to Kubernetes'){
-            steps {
-                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-                sh 'Kubectl  apply -f deployment.yml'
-				sh 'Kubectl  apply -f Service.yml'
+                   
+				               
             }
-            
         }
-		}
-           		
-
+            
     }
+    
 }
