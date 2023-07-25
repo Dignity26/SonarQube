@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                         // Your build steps for Node 1
-                sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
+                sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1/'
                 git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
             }
         }
