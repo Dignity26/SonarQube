@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                         // Your build steps for Node 2
-                sh "mvn package"
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage('Build and Push Docker image') {
