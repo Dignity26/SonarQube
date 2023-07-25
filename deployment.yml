@@ -15,5 +15,6 @@ spec:
       containers:
         - name: tomcat
           image: dignity26/my_tomcat_image:latest  # Replace with your DockerHub image name
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
