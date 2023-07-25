@@ -29,9 +29,9 @@ pipeline {
                 label 'node1'
             }
             steps {
-                
-                sh 'sudo ansible-playbook build_and_push_docker.yml'
-				
+                script{
+                sh 'ansible-playbook build_and_push_docker.yml'
+                }
                 
             }
         }
