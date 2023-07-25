@@ -15,7 +15,16 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
             }
         }
-        stage('Build') {
+        stage('Compile') {
+            agent {
+                label 'node1'
+            }
+            steps {
+                        // Your build steps for Node 2
+                sh "mvn compile"
+            }
+        }
+        stage('Test') {
             agent {
                 label 'node1'
             }
