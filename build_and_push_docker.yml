@@ -11,7 +11,7 @@
         source: build
         build:
           path: .   # Replace with the directory containing your Dockerfile
-          pull: yes
+          pull: no
         state: present
         force_tag: yes
 
