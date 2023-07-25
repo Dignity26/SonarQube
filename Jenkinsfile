@@ -49,7 +49,7 @@ pipeline {
                 label 'node2'
             }
             steps {
-                sh 'kubectl delete -f deployment.yml'
+                //sh 'kubectl delete -f deployment.yml'
                 sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
                 git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
                 sh 'kubectl  apply -f deployment.yml'
