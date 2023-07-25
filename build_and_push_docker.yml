@@ -4,25 +4,24 @@
   gather_facts: False
   become: true
 
-  vars:
-    dockerhub_username: "dignity26"
-    dockerhub_password: "Ajit$1994"  # It's recommended to use Ansible vault to store sensitive information like passwords.
-    image_name: "my_tomcat_image"    # Replace with your desired image name (without the username)
-
   tasks:
     - name: Build the Docker image
-      shell: |
-        docker build -t {{ dockerhub_username }}/{{ image_name }}:latest .
-      args:
-        chdir: .  # Replace with the directory containing your Dockerfile
+      docker_image:
+        name: dignity26/my_tomcat_image:latest
+        source: pull
+        build:
+          path: .   # Replace with the directory containing your Dockerfile
+          pull: yes
+        state: present
+        force_tag: yes
 
     - name: Log in to Docker Hub
-      shell: |
-        docker login -u {{ dockerhub_username }} -p {{ dockerhub_password }}
-      environment:
-        DOCKER_CLI_ACI: "1"
-        DOCKER_CLI_API: "1.41"
+      docker_login:
+        username: dignity26
+        password: Ajit$1994  # It's recommended to use Ansible vault to store sensitive information like passwords.
 
     - name: Push the Docker image to Docker Hub
-      shell: |
-        docker push {{ dockerhub_username }}/{{ image_name }}:latest
+      docker_image:
+        name: dignity26/my_tomcat_image:latest
+        source: local
+        push: yes
