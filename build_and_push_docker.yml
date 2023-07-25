@@ -6,7 +6,7 @@
 
   tasks:
     - name: Build the Docker image
-      docker_image:
+      community.docker.docker_image:
         name: dignity26/my_tomcat_image:latest
         build:
           path: .  # Replace with the directory containing your Dockerfile
@@ -15,11 +15,11 @@
         force_tag: yes
 
     - name: Log in to Docker Hub
-      docker_login:
+      community.docker.docker_login:
         username: dignity26
         password: Ajit$1994  # It's recommended to use Ansible vault to store sensitive information like passwords.
 
     - name: Push the Docker image to Docker Hub
-      docker_image:
+      community.docker.docker_image:
         name: dignity26/my_tomcat_image:latest
         push: yes
