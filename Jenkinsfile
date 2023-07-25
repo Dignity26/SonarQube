@@ -15,22 +15,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
             }
         }
-        stage('Clean and Compile') {
+        stage('build') {
             agent {
                 label 'node1'
             }
             steps {
                         // Your build steps for Node 2
-                sh "mvn clean compile"
-            }
-        }
-        stage('Test and package') {
-            agent {
-                label 'node1'
-            }
-            steps {
-                        // Your build steps for Node 2
-                sh "mvn install package"
+                sh "mvn clean install"
             }
         }
         stage('Build and Push Docker image') {
