@@ -8,9 +8,9 @@
     - name: Build the Docker image
       docker_image:
         name: dignity26/my_tomcat_image:latest1
-        source: build
+        source: buil
         build:
-          path: .  # Replace with the directory containing your Dockerfile
+          path: .   # Replace with the directory containing your Dockerfile
           pull: yes
         state: present
         force_tag: yes
