@@ -5,14 +5,13 @@
   become: true
 
   tasks:
-    - name: Build the Docker image
-      community.docker.docker_image:
-        name: dignity26/my_tomcat_image:latest
-        build:
-          path: .  # Replace with the directory containing your Dockerfile
-          pull: yes
-        state: present
-        force_tag: yes
+    - name: Build the Docker image using Docker SDK for Python
+      vars:
+        dockerfile_directory: .
+        image_name: dignity26/my_tomcat_image:latest
+      python:
+        docker:
+          state: build
 
     - name: Log in to Docker Hub
       community.docker.docker_login:
