@@ -16,8 +16,6 @@
         build:
           path: .   # Replace with the directory containing your Dockerfile
           pull: yes
-        state: present
-        force_tag: yes
 
     - name: Log in to Docker Hub
       docker_login:
