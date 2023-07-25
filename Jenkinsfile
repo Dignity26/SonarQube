@@ -28,7 +28,7 @@ pipeline {
         stage ('Docker'){
             steps{
                 script{
-                   ansible-playbook build_and_push_docker.yml
+                   sh 'ansible-playbook build_and_push_docker.yml'
 				   //sh 'sudo docker stop Thar'
 				   //sh 'sudo docker rm Thar'
 				   //sh 'sudo docker rmi dignity26/my_tomcat_image:latest'
@@ -38,8 +38,15 @@ pipeline {
 				   //sh 'sudo docker push dignity26/my_tomcat_image:latest'
 
 				} 
-                
+				
+		stage ('Deploy to Kubernetes'){
+            steps {
+                //sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh 'Kubectl  apply -f deployment.yml'
+				sh 'Kubectl  apply -f Service.yml'
             }
+            
+        }
 		}
            		
 
