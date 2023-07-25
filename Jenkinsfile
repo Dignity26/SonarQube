@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                         // Your build steps for Node 2
-                sh "mvn clean install"
+                sh "mvn package"
             }
         }
         stage('Build and Push Docker image') {
