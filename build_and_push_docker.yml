@@ -1,6 +1,6 @@
 ---
 - name: Build and push Docker image
-  hosts: web_servers
+  hosts: 172.31.32.240
   gather_facts: False
   become: true
 
