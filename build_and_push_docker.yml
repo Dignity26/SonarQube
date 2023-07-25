@@ -11,20 +11,18 @@
 
   tasks:
     - name: Build the Docker image
-      community.docker.docker_image:
-        name: "{{ dockerhub_username }}/{{ image_name }}:latest"
-        build:
-          path: .   # Replace with the directory containing your Dockerfile
-          pull: yes
-        state: present
-        force_tag: yes
+      shell: |
+        docker build -t {{ dockerhub_username }}/{{ image_name }}:latest .
+      args:
+        chdir: .  # Replace with the directory containing your Dockerfile
 
     - name: Log in to Docker Hub
-      community.docker.docker_login:
-        username: "{{ dockerhub_username }}"
-        password: "{{ dockerhub_password }}"
+      shell: |
+        docker login -u {{ dockerhub_username }} -p {{ dockerhub_password }}
+      environment:
+        DOCKER_CLI_ACI: "1"
+        DOCKER_CLI_API: "1.41"
 
     - name: Push the Docker image to Docker Hub
-      community.docker.docker_image:
-        name: "{{ dockerhub_username }}/{{ image_name }}:latest"
-        push: yes
+      shell: |
+        docker push {{ dockerhub_username }}/{{ image_name }}:latest
