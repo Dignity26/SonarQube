@@ -1,19 +1,16 @@
 ---
 - name: Build and push Docker image
   hosts: localhost
-  gather_facts: False
   become: true
 
   tasks:
     - name: Build the Docker image
-      docker_image:
-        name: dignity26/my_tomcat:latest
-        source: build
-        build:
-          path: .   # Replace with the directory containing your Dockerfile
-          pull: yes
-        state: present
-        force_tag: yes
+      command: docker build -t my_tomcat:latest .
+      args: 
+        chdir: /opt/docker
+
+    - name: adding tag to image
+      command: docker tag my_tomcat:latest dignity26/my_tomcat:latest
 
     - name: Log in to Docker Hub
       docker_login:
@@ -25,3 +22,7 @@
         name: dignity26/my_tomcat:latest
         source: local
         push: yes
+
+    - name: removing images from local
+      command: docker rmi my_tomcat:latest dignity26/my_tomcat:latest
+      ignore errors: yes
