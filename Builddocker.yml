@@ -16,7 +16,7 @@
         force_tag: yes
 
     - name: Add tag to docker image
-      command: docker tag -t tomcat dignity26/my_tomcat_image
+      command: docker tag tomcat dignity26/my_tomcat_image
 
     - name: Log in to Docker Hub
       docker_login:
