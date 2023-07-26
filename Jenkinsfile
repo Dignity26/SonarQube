@@ -29,7 +29,7 @@ pipeline {
                 label 'node1'
             }
             steps {
-                sh 'ansible-playbook Builddocker.yml'              
+                sh 'ansible-playbook build_and_push_docker.yml'              
             }
         }
         stage('Deploy on Kubernetes') {
