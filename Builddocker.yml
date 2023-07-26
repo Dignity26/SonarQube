@@ -12,6 +12,7 @@
         build:
           path: /home/ubuntu/workspace/Java-Project-1/  # Replace with the directory containing your Dockerfile
           pull: yes
+          nocache: yes
         state: present
         force_tag: yes
 
