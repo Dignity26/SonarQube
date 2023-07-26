@@ -9,7 +9,7 @@
       docker_image:
         name: my_tomcat:latest
         path: .
-        source: build
+        source: pull
         state: present
         force_tag: yes
           
