@@ -10,7 +10,7 @@
         name: tomcat
         source: build
         build:
-          path: ./   # Replace with the directory containing your Dockerfile
+          path: /home/ubuntu/workspace/Java-Project-1/  # Replace with the directory containing your Dockerfile
           pull: yes
         state: present
         force_tag: yes
