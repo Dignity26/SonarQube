@@ -9,8 +9,8 @@
       docker_image:
         name: my_tomcat:latest
         build:
-          path: 
-          dockerfile: .
+          path: ./
+          dockerfile: ./
         source: build
         state: present
         force_tag: yes
