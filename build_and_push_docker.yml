@@ -1,17 +1,11 @@
 - name: Build and push Docker image
   hosts: localhost
-  become: true
+  become: false
 
   tasks:
     - name: Build the Docker image
-      docker_image:
-        name: my_tomcat:latest
-        path: .   # Replace this with the directory containing your Dockerfile
-        source: build
-        build:
-          nocache: yes   # Set nocache to true to ignore the cache
-        state: present
-        force_tag: yes
+      command: sudo docker -t tag my_tomcat:latest .
+    
 
     - name: adding tag to image
       command: sudo docker tag my_tomcat:latest dignity26/my_tomcat:latest
