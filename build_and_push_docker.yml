@@ -4,12 +4,15 @@
   become: true
 
   tasks:
-    - name: removing images from local
-      command: sudo docker rmi my_tomcat:latest dignity26/my_tomcat:latest
-      ignore_errors: yes
-
     - name: Build the Docker image
-      command: sudo docker build --no-cache -t my_tomcat:latest .
+      docker_image:
+        name: my_tomcat:latest
+        path: .
+        build:
+          nocache: yes   # Set nocache to true to ignore the cache
+        state: present
+        force_tag: yes
+
 
     - name: adding tag to image
       command: sudo docker tag my_tomcat:latest dignity26/my_tomcat:latest
