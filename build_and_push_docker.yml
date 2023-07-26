@@ -5,16 +5,12 @@
     - name: Remove Docker builder cache
       command: docker builder prune --all --force
 
-    - name: Build the Docker image
-      docker_image:
-        name: my_tomcat:latest
-        build:
-          path: ./
-          dockerfile: ./
-        source: build
-        state: present
-        force_tag: yes
-          
+    - - name: Build Docker Image
+        community.docker.docker_image:
+          name: my_tomcat:latest
+          path: .
+          pull: yes
+           
     - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
 
