@@ -10,9 +10,9 @@
       community.docker.docker_image:
         name: my_tomcat:latest
         path: .
-        pull: True
+        pull: yes
 
-    - name: Adding tag to image
+    - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
 
     - name: Log in to Docker Hub
@@ -23,6 +23,6 @@
     - name: Push the Docker image to Docker Hub
       command: docker push dignity26/my_tomcat
 
-    - name: Removing images from local
+    - name: removing images from local
       command: docker rmi my_tomcat dignity26/my_tomcat
-      ignore_errors: True
+      ignore_errors: true
