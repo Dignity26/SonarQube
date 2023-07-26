@@ -1,24 +1,27 @@
 ---
-- name: Remove Docker builder cache
-  command: docker builder prune --all --force
+- name: Build and Push Docker Image
+  hosts: localhost
+  tasks:
+    - name: Remove Docker builder cache
+      command: docker builder prune --all --force
 
-- name: Build Docker Image
-  community.docker.docker_image:
-    name: my_tomcat:latest
-    path: .
-    pull: True
+    - name: Build Docker Image
+      community.docker.docker_image:
+        name: my_tomcat:latest
+        path: .
+        pull: True
 
-- name: Adding tag to image
-  command: docker tag my_tomcat dignity26/my_tomcat
+    - name: Adding tag to image
+      command: docker tag my_tomcat dignity26/my_tomcat
 
-- name: Log in to Docker Hub
-  docker_login:
-    username: dignity26
-    password: Ajit$1994
+    - name: Log in to Docker Hub
+      docker_login:
+        username: dignity26
+        password: Ajit$1994
 
-- name: Push the Docker image to Docker Hub
-  command: docker push dignity26/my_tomcat
+    - name: Push the Docker image to Docker Hub
+      command: docker push dignity26/my_tomcat
 
-- name: Removing images from local
-  command: docker rmi my_tomcat dignity26/my_tomcat
-  ignore_errors: True
+    - name: Removing images from local
+      command: docker rmi my_tomcat dignity26/my_tomcat
+      ignore_errors: True
