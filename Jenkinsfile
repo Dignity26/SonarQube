@@ -24,7 +24,7 @@ pipeline {
                 sh "mvn clean compile"
             }
         }
-                stage('Test and Package') {
+        stage('Test and Package') {
             agent {
                 label 'node1'
             }
