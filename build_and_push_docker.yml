@@ -5,7 +5,7 @@
 
   tasks:
     - name: Build the Docker image
-      command: sudo docker build -t my_tomcat:latest .
+      command: sudo docker build --no-cache -t my_tomcat:latest .
 
     - name: adding tag to image
       command: sudo docker tag my_tomcat:latest dignity26/my_tomcat:latest
