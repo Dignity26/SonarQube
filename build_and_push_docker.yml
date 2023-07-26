@@ -10,7 +10,7 @@
         name: my_tomcat:latest
         build:
           path: .
-          dockfile: .
+          dockerfile: .
         source: build
         state: present
         force_tag: yes
