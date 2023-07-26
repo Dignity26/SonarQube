@@ -1,0 +1,24 @@
+---
+- name: Build and Push Docker Image
+  hosts: all
+  become: true
+  tasks:
+    - name: Build Docker Image
+      command: docker image build -t my_tomcat_image:latest .
+      environment:
+        DOCKER_BUILDKIT: "0"
+
+    - name: adding tag to image
+      command: docker tag my_tomcat dignity26/my_tomcat
+
+    - name: Log in to Docker Hub
+      docker_login:
+        username: dignity26
+        password: Ajit$1994
+
+    - name: Push the Docker image to Docker Hub
+      command: docker push dignity26/my_tomcat
+
+    - name: removing images from local
+      command: docker rmi my_tomcat dignity26/my_tomcat
+      ignore_errors: true
