@@ -1,27 +1,23 @@
-- hosts: all
-  become: true
+- name: Remove Docker builder cache
+  command: docker builder prune --all --force
 
-  tasks:
-    - name: Remove Docker builder cache
-      command: docker builder prune --all --force
+- name: Build Docker Image
+  community.docker.docker_image:
+    name: my_tomcat:latest
+    path: .
+    pull: True
 
-    - - name: Build Docker Image
-        community.docker.docker_image:
-          name: my_tomcat:latest
-          path: .
-          pull: yes
-           
-    - name: adding tag to image
-      command: docker tag my_tomcat dignity26/my_tomcat
+- name: Adding tag to image
+  command: docker tag my_tomcat dignity26/my_tomcat
 
-    - name: Log in to Docker Hub
-      docker_login:
-        username: dignity26
-        password: Ajit$1994  # It's recommended to use Ansible vault to store sensitive information like passwords.
+- name: Log in to Docker Hub
+  docker_login:
+    username: dignity26
+    password: Ajit$1994
 
-    - name: Push the Docker image to Docker Hub
-      command: docker push dignity26/my_tomcat
+- name: Push the Docker image to Docker Hub
+  command: docker push dignity26/my_tomcat
 
-    - name: removing images from local
-      command: docker rmi my_tomcat dignity26/my_tomcat
-      ignore_errors: yes
+- name: Removing images from local
+  command: docker rmi my_tomcat dignity26/my_tomcat
+  ignore_errors: True
