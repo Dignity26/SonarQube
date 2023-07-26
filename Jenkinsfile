@@ -30,7 +30,7 @@ pipeline {
             }
             steps {
                 script{
-                   sh 'ansible-playbook build_and_push_docker.yml'
+                   sh 'ansible-playbook Builddocker.yml'
                 }
                 
             }
