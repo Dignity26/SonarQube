@@ -2,8 +2,16 @@
   become: true
 
   tasks:
+    - name: Remove Docker builder cache
+        command: docker builder prune --all --force
+
     - name: Build the Docker image
-      command: docker build -t my_tomcat:latest .
+      docker_image:
+        name: my_tomcat:latest
+        path: .
+        source: build
+        state: present
+        force_tag: yes
           
     - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
