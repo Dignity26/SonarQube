@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Build Docker Image
-      command: docker build -t my_tomcat_image:latest .
+      command: DOCKER_BUILDKIT=0 docker build -t my_tomcat_image:latest .
 
     - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
