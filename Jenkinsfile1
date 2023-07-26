@@ -28,7 +28,7 @@ pipeline {
         stage ('Docker'){
             steps{
                 script{
-                   sh 'ansible-playbook build_and_push_docker.yml'
+                   //sh 'ansible-playbook build_and_push_docker.yml'
 				   //sh 'sudo docker stop Thar'
 				   //sh 'sudo docker rm Thar'
 				   //sh 'sudo docker rmi dignity26/my_tomcat_image:latest'
