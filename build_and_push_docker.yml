@@ -8,7 +8,8 @@
       docker_image:
         name: my_tomcat:latest
         path: .
-        build:
+        source: build
+        build: 
           nocache: yes   # Set nocache to true to ignore the cache
         state: present
         force_tag: yes
