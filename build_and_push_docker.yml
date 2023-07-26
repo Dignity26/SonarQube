@@ -3,7 +3,7 @@
 
   tasks:
     - name: Remove Docker builder cache
-        command: docker builder prune --all --force
+      command: docker builder prune --all --force
 
     - name: Build the Docker image
       docker_image:
