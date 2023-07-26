@@ -1,16 +1,12 @@
 ---
 - name: Build and Push Docker Image
-  hosts: localhost
+  hosts: all
   become: true
   tasks:
-    - name: Remove Docker builder cache
-      command: docker builder prune --all --force
-
     - name: Build Docker Image
-      community.docker.docker_image:
-        name: my_tomcat:latest
-        path: .
-        pull: yes
+      command: docker build -t my_tomcat_image:latest .
+      args:
+        chdir: /usr/bin/docker
 
     - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
