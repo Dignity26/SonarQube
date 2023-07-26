@@ -32,7 +32,7 @@ pipeline {
                 script{
                    //sh 'sudo docker stop Thar'
 				   //sh 'sudo docker rm Thar'
-				   sh 'sudo docker rmi dignity26/my_tomcat_image:latest'
+				   //sh 'sudo docker rmi dignity26/my_tomcat_image:latest'
 				   sh 'sudo docker build -t dignity26/my_tomcat_image:latest .'
 				   sh 'sudo docker run -d -p 9090:8080 --name Thar dignity26/my_tomcat_image:latest'
 				   sh 'sudo docker login -u "dignity26" -p "Ajit\\$1994"'
