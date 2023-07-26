@@ -7,13 +7,16 @@
   tasks:
     - name: Build the Docker image
       docker_image:
-        name: dignity26/my_tomcat_image:latest
+        name: tomcat:latest
         source: pull
         build:
           path: .   # Replace with the directory containing your Dockerfile
           pull: yes
         state: present
         force_tag: yes
+
+    - name: Add tag to docker image
+      command: docker tag -t tomcat dignity26/my_tomcat_image
 
     - name: Log in to Docker Hub
       docker_login:
