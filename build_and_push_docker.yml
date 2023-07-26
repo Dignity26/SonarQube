@@ -5,8 +5,6 @@
   tasks:
     - name: Build Docker Image
       command: docker build -t my_tomcat_image:latest .
-      args:
-        chdir: /usr/bin/docker
 
     - name: adding tag to image
       command: docker tag my_tomcat dignity26/my_tomcat
