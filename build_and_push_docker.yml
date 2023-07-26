@@ -1,6 +1,7 @@
 ---
 - name: Build and Push Docker Image
   hosts: localhost
+  become: true
   tasks:
     - name: Remove Docker builder cache
       command: docker builder prune --all --force
