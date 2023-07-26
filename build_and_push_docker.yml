@@ -9,6 +9,7 @@
       docker_image:
         name: my_tomcat:latest
         build:
+          path: .
           context: .
         source: build
         state: present
