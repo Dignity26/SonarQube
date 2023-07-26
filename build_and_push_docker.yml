@@ -6,7 +6,7 @@
 
   tasks:
     - name: remove images
-      command: docker image prune -a
+      command: yes | docker image prune -a
 
     - name: Build the Docker image
       docker_image:
