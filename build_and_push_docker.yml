@@ -5,10 +5,10 @@
 
   tasks:
     - name: Build the Docker image
-      command: docker build -t my_tomcat:latest .
+      command: sudo docker build -t my_tomcat:latest .
 
     - name: adding tag to image
-      command: docker tag my_tomcat:latest dignity26/my_tomcat:latest
+      command: sudo docker tag my_tomcat:latest dignity26/my_tomcat:latest
 
     - name: Log in to Docker Hub
       docker_login:
@@ -22,5 +22,5 @@
         push: yes
 
     - name: removing images from local
-      command: docker rmi my_tomcat:latest dignity26/my_tomcat:latest
+      command: sudo docker rmi my_tomcat:latest dignity26/my_tomcat:latest
       ignore_errors: yes
