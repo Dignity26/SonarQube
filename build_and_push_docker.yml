@@ -1,13 +1,12 @@
-- name: Build and push Docker image
-  hosts: localhost
+- hosts: all
   become: true
 
   tasks:
     - name: Build the Docker image
       command: docker build -t my_tomcat:latest .
-    
+          
     - name: adding tag to image
-      command: docker tag my_tomcat:latest dignity26/my_tomcat:latest
+      command: docker tag my_tomcat dignity26/my_tomcat
 
     - name: Log in to Docker Hub
       docker_login:
@@ -15,11 +14,8 @@
         password: Ajit$1994  # It's recommended to use Ansible vault to store sensitive information like passwords.
 
     - name: Push the Docker image to Docker Hub
-      docker_image:
-        name: dignity26/my_tomcat:latest
-        source: local
-        push: yes
+      command: docker push dignity26/my_tomcat
 
     - name: removing images from local
-      command: docker rmi my_tomcat:latest dignity26/my_tomcat:latest
+      command: docker rmi my_tomcat dignity26/my_tomcat
       ignore_errors: yes
