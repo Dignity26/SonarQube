@@ -8,8 +8,9 @@
     - name: Build the Docker image
       docker_image:
         name: my_tomcat:latest
-        path: .
-        source: pull
+        build:
+          context: .
+        source: build
         state: present
         force_tag: yes
           
