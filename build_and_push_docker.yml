@@ -7,10 +7,7 @@
   tasks:
     - name: Prune all unused Docker images
       command: yes | docker image prune -a
-      args:
-        warn: false
       ignore_errors: yes
-      shell: true
 
     - name: Build the Docker image
       docker_image:
