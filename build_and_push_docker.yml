@@ -25,4 +25,4 @@
 
     - name: removing images from local
       command: docker rmi my_tomcat:latest dignity26/my_tomcat:latest
-      ignore errors: yes
+      ignore_errors: yes
