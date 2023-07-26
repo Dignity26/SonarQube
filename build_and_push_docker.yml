@@ -1,3 +1,4 @@
+---
 - name: Remove Docker builder cache
   command: docker builder prune --all --force
 
