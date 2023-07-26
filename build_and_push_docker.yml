@@ -5,7 +5,6 @@
 
   tasks:
     - name: Build the Docker image
-      nocache: yes
       command: sudo docker build -t my_tomcat:latest .
 
     - name: adding tag to image
