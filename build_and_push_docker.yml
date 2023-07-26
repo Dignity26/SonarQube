@@ -32,7 +32,5 @@
         name: dignity26/my_tomcat_image:latest
         source: local
         push: yes
-        nocache: yes
-        force: yes
 
         
