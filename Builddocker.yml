@@ -7,8 +7,8 @@
   tasks:
     - name: Build the Docker image
       docker_image:
-        name: tomcat:latest
-        source: pull
+        name: tomcat
+        source: build
         build:
           path: .   # Replace with the directory containing your Dockerfile
           pull: yes
