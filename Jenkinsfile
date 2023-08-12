@@ -38,9 +38,9 @@ pipeline {
                 label 'node1'
             }
             steps {
-                sh ''' mvn sonar:sonar -Dsonar.url=http://35.238.39.252:9000/ -Dsonar.login=squ_0ef90d8df6e2b6bf0697f8d138fcf0e788e19d21 -Dsonar.projectName=Sonarqube \
+                sh ''' mvn sonar:sonar -Dsonar.url=http://35.238.39.252:9000/ -Dsonar.login=squ_0ef90d8df6e2b6bf0697f8d138fcf0e788e19d21 -Dsonar.projectName=ABCtechnologies \
                 Dsonar.java.binaries=. \
-                Dsonar.projectKey=Sonarqube '''
+                Dsonar.projectKey=ABCtechnologies '''
             }
         }
 
