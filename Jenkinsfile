@@ -33,29 +33,17 @@ pipeline {
                 sh "mvn test package"
             }
         }
-        stage('Build and Push Docker image') {
+        stage('SonarQube Analysis') {
             agent {
                 label 'node1'
             }
             steps {
-                sh 'ansible-playbook build_and_push_docker.yml'              
+                sh ''' mvn sonar:sonar -Dsonar.url=http://35.238.39.252:9000/ -Dsonar.login=squ_0ef90d8df6e2b6bf0697f8d138fcf0e788e19d21 -Dsonar.projectName=Sonarqube \
+                Dsonar.java.binaries=. \
+                Dsonar.projectKey=Sonarqube '''
             }
         }
-        stage('Deploy on Kubernetes') {
-            agent {
-                label 'node2'
-            }
-            steps {
-                //sh 'kubectl delete -f deployment.yml'
-                sh 'kubectl  apply -f deployment1.yml'
-                //sh 'docker image prune'
-                sh 'rm -rf /var/lib/jenkins/workspace/Sample-Project-1'
-                git branch: 'main', url: 'https://github.com/Dignity26/Industry-Grade-Project-I.git'
-                sh 'kubectl  apply -f deployment.yml'
-				sh 'kubectl  apply -f service.yml'
-							               
-            }
-        }
+
             
     }
     
